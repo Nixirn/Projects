@@ -1,0 +1,15 @@
+int x;
+int y;
+y = 0;
+x = 5;
+
+void main() {
+   while (x > 0) {
+      while (y < 10) {
+         y = y +1;
+         write y;
+         writeln;
+      }
+      x = x - 1;
+   }
+}
