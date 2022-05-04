@@ -24,10 +24,10 @@ let overCell = false;
 let doneDrawing = false;
 let cellX, cellY;
 
-// Function for each cell (will be turned into a class later)
+// Cell class
 class Cell {
   visit = false;
-  weight = Infinity; // Tracks the cell before it
+  weight = Infinity; 
   prevCell = undefined;
   wall = false;
 
@@ -74,17 +74,15 @@ function setup() {
   }
 
   // Setting the start point and setting its values to start the search
-  start = grid[1][1];
+  start = grid[1][1]; // FIXME: Gen start point
   start.weight = 0;
   start.visit = true;
-  end = grid[cols - 1][rows - 1];
+  end = grid[cols - 1][rows - 1]; // FIXME: Gen end point (must be at least a few blocks away from start)
   visited.push(start);
 }
 
-// Width div cells
 
-// Make a loop that denotes cells as walls by setting their weight to canvasSize * 2
-
+// Loop that denotes cells as walls by setting their weight to canvasSize * 2
 function doneDrawingPhase() {
   doneDrawing = true;
 }
@@ -216,7 +214,7 @@ function getNeighbors(cell, gridC) {
   return out;
 }
 
-// Almost like a Unity Update Function
+// Clear start but no clear end yet need to find that
 function draw() {
   // Animation Loop
   background(0);
@@ -321,7 +319,7 @@ function reset() {
 // Change Later
 function mousePressed() {
   if (overCell) {
-    if (grid[cellX][cellY]) {
+    if (grid[cellX][cellY]) { // FIXME: Crashes when the mouse goes off screen to the right
       if(grid[cellX][cellY].compare(start) || grid[cellX][cellY].compare(end)) {
         console.log("Start or the End cannot be walls");
       }
