@@ -53,6 +53,26 @@ class Cell {
   }
 }
 
+function getRandomCell() {
+  let pointsGenerated = false;
+  var cellSetS = [];
+  var cellSetE = [];
+  while(!pointsGenerated) {
+    cellSetS[0] = Math.floor(Math.random() * rows);
+    cellSetS[1] = Math.floor(Math.random() * rows);
+
+    cellSetE[0] = Math.floor(Math.random() * rows);
+    cellSetE[1] = Math.floor(Math.random() * rows);
+
+
+    if (cellSetS[0] != cellSetE[0] && cellSetS[1] != cellSetE[1]) {
+      pointsGenerated = true;
+    }
+  }
+
+  return [cellSetS[0], cellSetS[1], cellSetE[0], cellSetE[1]];
+}
+
 function setup() {
   let size =
         window.innerHeight < window.innerWidth
@@ -74,10 +94,11 @@ function setup() {
   }
 
   // Setting the start point and setting its values to start the search
-  start = grid[1][1]; // FIXME: Gen start point
+  let points = getRandomCell();
+  start = grid[points[0]][points[1]]; // FIXME: Gen start point
   start.weight = 0;
   start.visit = true;
-  end = grid[cols - 1][rows - 1]; // FIXME: Gen end point (must be at least a few blocks away from start)
+  end = grid[points[2]][points[3]]; // FIXME: Gen end point (must be at least a few blocks away from start)
   visited.push(start);
 }
 
@@ -254,10 +275,13 @@ function draw() {
   ellipse(mouseX, mouseY, 10, 10);
   // pop() // goes back to save
 
+  // TODO: turn this into a function 
   cellX = floor(mouseX / w);
   cellY = floor(mouseY / h);
 
-  if (cellX < rows && cellY < cols) {
+  // TODO: turn this into a function
+  // Checks if mouse is over a valid cell 
+  if (cellX < rows && cellX >= 0 && cellY >= 0 && cellY < cols) {
     let cell = grid[cellX][cellY];
     if (cell) {
       overCell = true;
@@ -268,6 +292,8 @@ function draw() {
     } else {
       overCell = false;
     }
+  } else {
+    overCell = false;
   }
 
   if (walls.length > lastWallLen) {
@@ -319,7 +345,7 @@ function reset() {
 // Change Later
 function mousePressed() {
   if (overCell) {
-    if (grid[cellX][cellY]) { // FIXME: Crashes when the mouse goes off screen to the right
+    if (grid[cellX][cellY]) { 
       if(grid[cellX][cellY].compare(start) || grid[cellX][cellY].compare(end)) {
         console.log("Start or the End cannot be walls");
       }
