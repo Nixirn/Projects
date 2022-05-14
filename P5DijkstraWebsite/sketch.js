@@ -53,7 +53,8 @@ class Cell {
   }
 }
 
-function getRandomCell() {
+// Creates random cell positions (Can be done better)
+function getRandomStartEnd() {
   let pointsGenerated = false;
   var cellSetS = [];
   var cellSetE = [];
@@ -64,8 +65,9 @@ function getRandomCell() {
     cellSetE[0] = Math.floor(Math.random() * rows);
     cellSetE[1] = Math.floor(Math.random() * rows);
 
-
-    if (cellSetS[0] != cellSetE[0] && cellSetS[1] != cellSetE[1]) {
+    var dis = Math.floor(Math.sqrt(Math.pow((cellSetE[0] - cellSetS[0]), 2)) + Math.sqrt(Math.pow((cellSetE[1] - cellSetS[1]), 2)));
+    
+    if (cellSetS[0] != cellSetE[0] && cellSetS[1] != cellSetE[1] && dis > 7) {
       pointsGenerated = true;
     }
   }
@@ -94,11 +96,11 @@ function setup() {
   }
 
   // Setting the start point and setting its values to start the search
-  let points = getRandomCell();
-  start = grid[points[0]][points[1]]; // FIXME: Gen start point
+  let points = getRandomStartEnd();
+  start = grid[points[0]][points[1]]; 
   start.weight = 0;
   start.visit = true;
-  end = grid[points[2]][points[3]]; // FIXME: Gen end point (must be at least a few blocks away from start)
+  end = grid[points[2]][points[3]]; 
   visited.push(start);
 }
 
@@ -233,6 +235,13 @@ function getNeighbors(cell, gridC) {
   }
 
   return out;
+}
+
+function mouseCellPos() {
+  var x = floor(mouseX / w);
+  var y = floor(mouseY / h);
+
+  return [x, y];
 }
 
 // Clear start but no clear end yet need to find that
