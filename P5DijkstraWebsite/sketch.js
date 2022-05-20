@@ -319,6 +319,8 @@ function draw() {
 
 function reset() {
 
+  console.log("RUN RESET");
+
   // Dose Not actually reset cells
   // for (let cell of grid) {
   //   console.log("IN RESET LOOP");
@@ -331,24 +333,24 @@ function reset() {
   //   }
   // }
 
-  for (let i = 0; i < cols; i++) {
-    console.log("IN RESET LOOP");
-    for (let j = 0; j < rows; j++) {
-      if (grid[i][j].compare(start)) {
-        continue;
-      } else {
-        grid[i][j].weight = Infinity;
-        grid[i][j].visit = false;
-        grid[i][j].prevCell = undefined;
-      }
-    }
-  }
+  // for (let i = 0; i < cols; i++) {
+  //   console.log("IN RESET LOOP");
+  //   for (let j = 0; j < rows; j++) {
+  //     if (grid[i][j].compare(start)) {
+  //       continue;
+  //     } else {
+  //       grid[i][j].weight = Infinity;
+  //       grid[i][j].visit = false;
+  //       grid[i][j].prevCell = undefined;
+  //     }
+  //   }
+  // }
 
-  visited = [];
-  notVisited = [];
-  path = [];
-  console.log('Reset!');
-  console.log({grid});
+  // visited = [];
+  // notVisited = [];
+  // path = [];
+  // console.log('Reset!');
+  // console.log({grid});
 }
 
 // Change Later
