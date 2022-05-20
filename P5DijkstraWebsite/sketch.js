@@ -237,7 +237,7 @@ function getNeighbors(cell, gridC) {
   return out;
 }
 
-function mouseCellPos() {
+function getMouseCellPos() {
   var x = floor(mouseX / w);
   var y = floor(mouseY / h);
 
@@ -284,26 +284,9 @@ function draw() {
   ellipse(mouseX, mouseY, 10, 10);
   // pop() // goes back to save
 
-  // TODO: turn this into a function 
-  cellX = floor(mouseX / w);
-  cellY = floor(mouseY / h);
-
   // TODO: turn this into a function
   // Checks if mouse is over a valid cell 
-  if (cellX < rows && cellX >= 0 && cellY >= 0 && cellY < cols) {
-    let cell = grid[cellX][cellY];
-    if (cell) {
-      overCell = true;
-
-      // Do not highlight start and end cells
-      cell.show(color(0, 0, 0, 100))
-
-    } else {
-      overCell = false;
-    }
-  } else {
-    overCell = false;
-  }
+  overCell = cellVerification();
 
   if (walls.length > lastWallLen) {
     let gridClone = grid; // Grid with just walls
@@ -317,6 +300,24 @@ function draw() {
   }
 }
 
+function cellVerification() {
+
+  let mousePos = getMouseCellPos(); 
+
+  if (mousePos[0] < rows && mousePos[0] >= 0 && mousePos[1] >= 0 && mousePos[1] < cols) {
+    let cell = grid[mousePos[0]][mousePos[1]];
+    if (cell) {
+
+      // Do not highlight start and end cells
+      cell.show(color(0, 0, 0, 100));
+      return true;
+
+    } else { return false; }
+
+  } else { return false; }
+}
+
+// Resets Grid to its initial state
 function reset() {
 
   console.log("RUN RESET");
@@ -355,17 +356,21 @@ function reset() {
 
 // Change Later
 function mousePressed() {
+
+  var mouseCell = getMouseCellPos();
+
   if (overCell) {
-    if (grid[cellX][cellY]) { 
-      if(grid[cellX][cellY].compare(start) || grid[cellX][cellY].compare(end)) {
+    if (grid[mouseCell[0]][mouseCell[1]]) { 
+      if(grid[mouseCell[0]][mouseCell[1]].compare(start) || grid[mouseCell[0]][mouseCell[1]].compare(end)) {
         console.log("Start or the End cannot be walls");
       }
       else {
-        grid[cellX][cellY].wall = true;
-        walls.push(grid[cellX][cellY]);
+        grid[mouseCell[0]][mouseCell[1]].wall = true;
+        walls.push(grid[mouseCell[0]][mouseCell[1]]);
       }
     }
   }
+  
 }
 
 // Change grid creation loop
