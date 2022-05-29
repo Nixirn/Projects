@@ -284,8 +284,7 @@ function draw() {
   ellipse(mouseX, mouseY, 10, 10);
   // pop() // goes back to save
 
-  // TODO: turn this into a function
-  // Checks if mouse is over a valid cell 
+  
   overCell = cellVerification();
 
   if (walls.length > lastWallLen) {
@@ -293,6 +292,7 @@ function draw() {
     console.log({grid});
     console.log({gridClone});
     
+    // TODO: Find how to change the color of the walls back to white after a reset
     reset();
     endFound = false;
     dijkstra(gridClone);
@@ -300,6 +300,7 @@ function draw() {
   }
 }
 
+// Checks if mouse is over a valid cell 
 function cellVerification() {
 
   let mousePos = getMouseCellPos(); 
@@ -317,6 +318,7 @@ function cellVerification() {
   } else { return false; }
 }
 
+// TODO: Make another function for a forced reset, or overload this one
 // Resets Grid to its initial state
 function reset() {
 
@@ -334,24 +336,24 @@ function reset() {
   //   }
   // }
 
-  // for (let i = 0; i < cols; i++) {
-  //   console.log("IN RESET LOOP");
-  //   for (let j = 0; j < rows; j++) {
-  //     if (grid[i][j].compare(start)) {
-  //       continue;
-  //     } else {
-  //       grid[i][j].weight = Infinity;
-  //       grid[i][j].visit = false;
-  //       grid[i][j].prevCell = undefined;
-  //     }
-  //   }
-  // }
+  for (let i = 0; i < cols; i++) {
+    console.log("IN RESET LOOP");
+    for (let j = 0; j < rows; j++) {
+      if (grid[i][j].compare(start)) {
+        continue;
+      } else {
+        grid[i][j].weight = Infinity;
+        grid[i][j].visit = false;
+        grid[i][j].prevCell = undefined;
+      }
+    }
+  }
 
-  // visited = [];
-  // notVisited = [];
-  // path = [];
-  // console.log('Reset!');
-  // console.log({grid});
+  visited = [];
+  notVisited = [];
+  path = [];
+  console.log('Reset!');
+  console.log({grid});
 }
 
 // Change Later
