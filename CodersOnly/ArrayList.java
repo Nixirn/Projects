@@ -43,7 +43,7 @@ public abstract class ArrayList<T> implements ListADT<T>, Iterable<T>, Serializa
     	else
     	{
 	    	T store;
-	    
+                
 	        rear--; //decrement rear due to one less item in list
 	        store = list[rear];//stores last element to return
 	        list[rear] = null; //deletes the element
@@ -72,10 +72,10 @@ public abstract class ArrayList<T> implements ListADT<T>, Iterable<T>, Serializa
         }
     }
 
-    public T remove(T removeMember)
+    public T remove(T remove)
     {
     	T result;
-        int index = find(removeMember);
+        int index = find(remove);
 
         if (index == NOT_FOUND)
         {
