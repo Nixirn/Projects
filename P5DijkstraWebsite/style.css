@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color:blue;
 }
 
 canvas {
@@ -8,4 +9,9 @@ canvas {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.grid_btn {
+  background-color: black;
+  color: white;
 }

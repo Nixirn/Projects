@@ -433,11 +433,11 @@ public class CSCMatch {
 									    	System.out.println("Enter the name of the intrest you would like to remove");
 										    String remove = input.nextLine();
 									    	
-										    for (Intrest b: found.getLoI()) {
+										    for (Interest b: found.getLoI()) {
 										    	
 										    	if (b.getInterestName().equalsIgnoreCase(remove)) 
 										    	{
-										    		found.getLoI().remove(remove);
+										    		found.getLoI().remove(b);
 										    		System.out.println("Intrest " + remove + " for " + found + " was removed successfully");
 										    		fou = true;
 										    		break;
