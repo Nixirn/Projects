@@ -38,4 +38,10 @@ public class ArrayOrderedList<T> extends ArrayList<T>
         rear++;
 		modCount++;
     }
+
+    @Override
+    public T remove(T element) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+    }
 }
